@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
 
   devise_for :users
 
@@ -14,6 +15,12 @@ Rails.application.routes.draw do
 
   resources :conversations do
     resources :messages
+  end
+
+  resources :posts do
+    collection do
+      get 'user'
+    end
   end
 
 

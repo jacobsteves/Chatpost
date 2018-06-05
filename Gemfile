@@ -13,6 +13,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'devise'
 gem 'private_pub'
 gem 'thin'
+gem 'ckeditor', '~> 4.2.4'
+gem 'simple_form', '~> 3.2'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 
 group :development do
