@@ -16,8 +16,8 @@
 //= require jquery_ujs
 //= require bootstrap.min
 //= require private_pub
-//= require chat
-//= require conversation
 //= require ckeditor/init
 //= require turbolinks
 //= require_tree .
+//= require chat
+//= require conversation

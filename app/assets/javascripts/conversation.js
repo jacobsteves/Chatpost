@@ -1,6 +1,6 @@
 // JavaScript
 
-var ready = function () {
+var convoReady = function () {
 
     //
     // When the send message link on our home page is clicked
@@ -8,7 +8,7 @@ var ready = function () {
     // recipient_id
     //
 
-    $('.start-conversation').click(function (e) {
+    $('.start-conversation').on('click', function (e) {
         e.preventDefault();
 
         var sender_id = $(this).data('sid');
@@ -66,10 +66,4 @@ var ready = function () {
     });
 
 
-}
-
-//
-// Page listeners
-//
-$(document).ready(ready);
-$(document).on("page:load", ready);
+};
