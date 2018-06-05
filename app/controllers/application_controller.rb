@@ -4,8 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :set_user
+  before_action :load_conversations
 
   protected
+
+  def load_conversations
+    @users = User.where.not("id = ?",current_user.id).order("created_at DESC")
+    @conversations = Conversation.involving(current_user).order("created_at DESC")
+  end
 
   def not_found(exception = nil)
     Rails.logger.warn("Triggered routing error manually from ApplicationController." + (exception.present? ? "Specific error was: #{exception.inspect}" : ''))

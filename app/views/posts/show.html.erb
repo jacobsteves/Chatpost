@@ -1,6 +1,10 @@
 <%= render "layouts/nav" %>
 <div class="col-sm-11 col-xs-12 blog-content">
-  <h2 class="text-center"><%= link_to @post.title, edit_post_path(@post) %></h2>
+  <% if current_user.id == @post.user_id %>
+    <h2 class="text-center"><%= link_to @post.title, edit_post_path(@post) %></h2>
+  <% else %>
+    <h2 class="text-center"><%= @post.title %></h2>
+  <% end %>
   <h5 class="text-center"><%= @post.created_at.strftime('%b %d, %Y') %></h5>
   <div><%= raw @post.body %></div>
 </div>

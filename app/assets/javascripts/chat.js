@@ -18,7 +18,6 @@ var ready = function () {
          *
          * @param conversation_id
          */
-
         chatWith: function (conversation_id) {
 
             chatBox.createChatBox(conversation_id);
@@ -30,7 +29,6 @@ var ready = function () {
          *
          * @param conversation_id
          */
-
         close: function (conversation_id) {
             $('#chatbox_' + conversation_id).css('display', 'none');
             chatBox.restructure();
@@ -39,7 +37,6 @@ var ready = function () {
         /**
          * Plays a notification sound when a new chat message arrives
          */
-
         notify: function () {
             var audioplayer = $('#chatAudio')[0];
             audioplayer.play();
@@ -50,7 +47,6 @@ var ready = function () {
          * added or removed from the view, it restructures them so that they appear
          * neatly aligned on the page
          */
-
         restructure: function () {
             align = 0;
             for (x in chatBoxes) {
@@ -73,14 +69,13 @@ var ready = function () {
          * Takes in two parameters. It is responsible for fetching the specific conversation's
          * html page and appending it to the body of our home page e.g if conversation_id = 1
          *
-         * $.get("conversations/1, function(data){
+         * $.get("/conversations/1, function(data){
          *    // rest of the logic here
          * }, "html")
          *
          * @param conversation_id
          * @param minimizeChatBox
          */
-
         createChatBox: function (conversation_id, minimizeChatBox) {
             if ($("#chatbox_" + conversation_id).length > 0) {
                 if ($("#chatbox_" + conversation_id).css('display') == 'none') {
@@ -93,7 +88,7 @@ var ready = function () {
 
             $("body").append('<div id="chatbox_' + conversation_id + '" class="chatbox"></div>')
 
-            $.get("conversations/" + conversation_id, function (data) {
+            $.get("/conversations/" + conversation_id, function (data) {
                 $('#chatbox_' + conversation_id).html(data);
                 $("#chatbox_" + conversation_id + " .chatboxcontent").scrollTop($("#chatbox_" + conversation_id + " .chatboxcontent")[0].scrollHeight);
             }, "html");
@@ -165,7 +160,6 @@ var ready = function () {
          * @param chatboxtextarea
          * @param conversation_id
          */
-
         checkInputKey: function (event, chatboxtextarea, conversation_id) {
             if (event.keyCode == 13 && event.shiftKey == 0) {
                 event.preventDefault();
@@ -257,7 +251,6 @@ var ready = function () {
      * http://www.gnu.org/licenses/gpl.html
      *
      */
-
     jQuery.cookie = function (name, value, options) {
         if (typeof value != 'undefined') { // name and value given, set cookie
             options = options || {};

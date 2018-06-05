@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   authenticated :user do
-    root 'users#index'
+    root 'posts#index'
   end
 
   unauthenticated :user do
