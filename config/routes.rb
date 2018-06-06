@@ -23,5 +23,11 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      devise_for :users, defaults: { format: :json }, as: :users
+      resources :messages
+    end
+  end
 
 end

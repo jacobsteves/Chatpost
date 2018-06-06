@@ -1,74 +1,76 @@
-<div id="chatBox" class="chatbar-container">
-    <span class="chatbar-close" onclick="closeChat()">&times;</span>
-    <div class="chatbar-currentuser">
-        <div class="panel panel-default">
-            <!-- Default panel contents -->
-            <div class="panel-heading">Current Users</div>
+<% if user_signed_in? %>
+  <div id="chatBox" class="chatbar-container">
+      <span class="chatbar-close" onclick="closeChat()">&times;</span>
+      <div class="chatbar-currentuser">
+          <div class="panel panel-default">
+              <!-- Default panel contents -->
+              <div class="panel-heading">Current Users</div>
 
-            <!-- Table -->
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <% @users.each_with_index do |user, index| %>
-                <tr>
-                    <td><%= index +=1 %></td>
-                    <td><%= user.name %></td>
-                    <td>
-                        <%= link_to "Send Message", "#",
-                        class: "btn btn-success btn-xs start-conversation",
-                        "data-sid" => current_user.id, "data-rip" => user.id %>
-                    </td>
-                </tr>
-                <% end %>
+              <!-- Table -->
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th></th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <% @users.each_with_index do |user, index| %>
+                  <tr>
+                      <td><%= index +=1 %></td>
+                      <td><%= user.name %></td>
+                      <td>
+                          <%= link_to "Send Message", "#",
+                          class: "btn btn-success btn-xs start-conversation",
+                          "data-sid" => current_user.id, "data-rip" => user.id %>
+                      </td>
+                  </tr>
+                  <% end %>
 
-                </tbody>
-            </table>
-        </div>
+                  </tbody>
+              </table>
+          </div>
 
-    </div>
-    <hr>
-    <h3 style="padding-left:1em;">Your Conversations</h3>
+      </div>
+      <hr>
+      <h3 style="padding-left:1em;">Your Conversations</h3>
 
-    <div class="chatbar-conversations">
-        <% if @conversations.any? %>
-        <ul class="media-list">
-            <% @conversations.each do |conversation| %>
-            <li class="media">
-                <%= image_tag("http://placehold.it/50x50", class: "media-object pull-left") %>
-                <div class="media-body">
-                    <%= link_to "", conversation_path(conversation), class: "conversation", "data-cid" => conversation.id %>
-                    <h4 class="media-heading"><%= conversation_interlocutor(conversation).name %></h4>
-                    <p><%= conversation.messages.last.nil? ? "No messages" : truncate(conversation.messages.last.body, length: 45) %></p>
-                </div>
-            </li>
+      <div class="chatbar-conversations">
+          <% if @conversations.any? %>
+          <ul class="media-list">
+              <% @conversations.each do |conversation| %>
+              <li class="media">
+                  <%= image_tag("http://placehold.it/50x50", class: "media-object pull-left") %>
+                  <div class="media-body">
+                      <%= link_to "", conversation_path(conversation), class: "conversation", "data-cid" => conversation.id %>
+                      <h4 class="media-heading"><%= conversation_interlocutor(conversation).name %></h4>
+                      <p><%= conversation.messages.last.nil? ? "No messages" : truncate(conversation.messages.last.body, length: 45) %></p>
+                  </div>
+              </li>
 
-            <% end %>
-        </ul>
-        <% else %>
-        <p>You have no conversations. Click send message with any user to create one.</p>
-        <% end %>
-    </div>
+              <% end %>
+          </ul>
+          <% else %>
+          <p>You have no conversations. Click send message with any user to create one.</p>
+          <% end %>
+      </div>
 
-</div>
+  </div>
 
-<div class="col-md-4">
+  <div class="col-md-4">
 
-</div>
+  </div>
 
-<span class="chatbar-toggle" onclick="openChat()">CHAT</span>
+  <span class="chatbar-toggle" onclick="openChat()">CHAT</span>
 
-<script>
-    function openChat() {
-        document.getElementById("chatBox").style.width = "400px";
-    }
+  <script>
+      function openChat() {
+          document.getElementById("chatBox").style.width = "400px";
+      }
 
-    function closeChat() {
-        document.getElementById("chatBox").style.width = "0";
-    }
-</script>
+      function closeChat() {
+          document.getElementById("chatBox").style.width = "0";
+      }
+  </script>
+<% end %>

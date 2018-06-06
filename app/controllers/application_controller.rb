@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def load_conversations
+    return unless user_signed_in?
     @users = User.where.not("id = ?",current_user.id).order("created_at DESC")
     @conversations = Conversation.involving(current_user).order("created_at DESC")
   end
