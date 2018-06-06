@@ -23,3 +23,13 @@
    color: #eaeaea;
    text-decoration: none;
  }
+
+ .nav-links > li > a {
+     color: #f1f1f1 !important;
+     font-weight: 400;
+ }
+
+ .nav-links > li > a:hover {
+    color: white !important;
+    font-weight: 400;
+ }

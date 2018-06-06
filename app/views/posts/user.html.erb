@@ -18,5 +18,10 @@
         <br>
       </div>
     <% end %>
+    <% if current_user.posts.blank? %>
+      <div class="text-center">
+        <p>You do not have any posts yet! You can make one <%= link_to "here!", new_post_path %></p>
+      </div>
+    <% end %>
   </div>
 </div>

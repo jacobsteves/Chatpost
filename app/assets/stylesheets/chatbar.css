@@ -29,7 +29,7 @@
 .chatbar-close {
     font-size: 30px;
     cursor: pointer;
-    right: 0;
+    right: 10px;
     top: 0;
     float: right;
     position: absolute;
