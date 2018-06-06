@@ -27,6 +27,12 @@ Rails.application.routes.draw do
     namespace :v1 do
       devise_for :users, defaults: { format: :json }, as: :users
       resources :messages
+      resources :conversations
+      resources :posts do
+        collection do
+          match 'user', via: [:get, :post]
+        end
+      end
     end
   end
 

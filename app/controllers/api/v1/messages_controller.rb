@@ -1,27 +1,26 @@
 module Api
   module V1
-    class MessagesController < ApiController
-      before_filter :authenticate_user!
-      respond_to :json
+    class MessagesController < LoggedInController
 
       def create
-        render :json=> {:success=>true}
+        conversation = Conversation.find(params[:conversation_id])
+        message = conversation.messages.build(params[:message].to_h)
+        message.user_id = current_user.id
+
+        if message.save!
+          render :json=> {:success=>true, :message=>message}
+        else
+          render :json=> {:success=>false, :message=>"Error creating message."}, :status=>500
+        end
       end
 
-      def destroy
-        sign_out(resource_name)
+      def show
+        render :json => {
+            :success => true,
+            :message => Message.find(params[:id].to_i)
+        }
       end
 
-      protected
-      def ensure_params_exist
-        return unless params[:user_login].blank?
-        render :json=>{:success=>false, :message=>"missing user_login parameter"}, :status=>422
-      end
-
-      def invalid_login_attempt
-        warden.custom_failure!
-        render :json=> {:success=>false, :message=>"Error with your login or password"}, :status=>401
-      end
     end
   end
 end
