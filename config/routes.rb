@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :posts do
         collection do
           match 'user', via: [:get, :post]
+          match 'page', via: [:get, :post]
         end
       end
     end

@@ -2,10 +2,13 @@ module Api
   module V1
     class ConversationsController < LoggedInController
 
-      def index
-        render :json=> {:success => true}
-      end
-
+      ##
+      # POST /api/v1/conversations
+      #
+      # params = {
+      #   sender_id: 1,
+      #   recipient_id: 2
+      # }
       def create
         if Conversation.between(params[:sender_id],params[:recipient_id]).present?
           @conversation = Conversation.between(params[:sender_id],params[:recipient_id]).first
@@ -16,6 +19,8 @@ module Api
         render json: { conversation_id: @conversation.id }
       end
 
+      ##
+      # GET /api/v1/conversations/i
       def show
         render :json => {
             :success => true,
